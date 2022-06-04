@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="catalogstyle.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+	<title>Online Catalog</title>
+</head>
+
+<body>
+	<header style="position:absolute; margin-top: 0; padding-top: 0;">
+		<div>
+			<h1 id="onlinestore"><i class="bi bi-cart3"></i>Online Store</h1><h6 id="com">.com</h6>
+			<h4 id="aboutme"><a href="About-Me\aboutme.html" target="_blank" style="text-decoration:none ; color: black;"><i class="bi bi-person-fill"></i>About-Me</h4></a>
+		</div>
+		<h4><i class="bi bi-search" id="icon"></i></h4>
+		<div class="mb-3">
+			<input type="text" class="form-control" id="Search-bar" placeholder="Search-Bar" oninput="searchProducts(this.value)">
+		</div>
+		
+	</header>
+	<h3 style="margin-left: 50px;font-family: monospace; margin-top: 0px;padding-top:450px; padding-bottom: 50px;text-align: center; font-size: 50px;">
+		<strong>Product Listings</strong>
+	</h3>
+	<section id="products"class="bg-light mt-5">
+	</section>
+	<br>
+
+
+
+	
+</body>
+<script>
+
+	let productData;
+
+	function setProductsInnerHTML(products) {
+		let innerHTMLCode = `<div class="container-lg">		
+			<div class="row my-10 align-items-center justify-content-center g-4">`
+
+		for (let i = 0; i < products.length; i++) {
+			innerHTMLCode = innerHTMLCode.concat(
+				`<div class="col-8 col-lg-4">
+					<div class="card border-none shadow-lg p-3 mb-5 bg-body rounded" style="height: 30rem; position:relative;">
+						<div class="card-body text-center py-4 my-200">
+							<h4 class="card-title">${products[i].title}</h4>
+							<p class="disply-5 my-4" style = "position : absolute; top:50px;"><strong>Ratings:</strong> ${products[i].rating}/5</p>
+							<p class="lead card-subtitle"><img src="${products[i].images[0]}" class="my-images card-img-top"></p>
+							<p class="disply-5 my-4 text-secondary" style = "position : absolute; top:270px; text-align:center;"> ${products[i].description}</p><br>
+							<p class="lead card-subtitle" style = " position: absolute; bottom:75px; left:42%; text-align:center"><strong>Rs ${products[i].price}</strong></p>
+							<a href="#" class="btn btn-success btn-lg mt-3 mb-3" style = "position : absolute; bottom:0px; left:37%;">Buy Now</a>
+						</div>
+					</div>
+				</div>`
+			)
+		}
+
+		let productsElement = document.getElementById("products")
+		innerHTMLCode = innerHTMLCode.concat(`</div></div>`)
+		productsElement.innerHTML = innerHTMLCode
+	}
+
+	function getData() {
+		fetch("dummy_data.json")
+			.then(response => response.json())
+			.then(data => {
+				let innerHTMLCode = ""
+				productData = data.products
+				setProductsInnerHTML(productData)
+			})
+	}
+
+	getData()
+
+	function searchProducts(searchString) {
+		let products = []
+		for (let i = 0; i < productData.length; i++) {
+			if ((productData[i].title).toLowerCase().includes(searchString.toLowerCase()) ) {
+				products.push(productData[i])
+			}
+			else if ((productData[i].category).toLowerCase().includes(searchString.toLowerCase())) {
+				products.push(productData[i])
+			}
+		}
+		setProductsInnerHTML(products)
+	}
+
+</script>
+
+</html>

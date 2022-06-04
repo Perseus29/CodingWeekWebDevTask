@@ -1,0 +1,56 @@
+#onlinestore{
+    font-size: 84px;
+    display: inline-block;
+    position: relative;
+    left: 30%;
+    top: 70px;
+}
+
+header{
+    background-color: #d9d9d9;
+    width: 100%;
+    padding-bottom: 190px;
+    padding-top: 0%;
+    margin-top: 0%;
+}
+
+#com{
+    display:inline-block ;
+    position: relative;
+    left: 30%;
+    top: 70px;
+    font-size: 24px;
+}
+
+#aboutme{
+    display:inline-block ;
+    position: relative;
+    left: 710px;
+}
+
+#Search-bar{
+    max-width: 40%;
+    position: relative;
+    text-align :center;
+    left: 30%;
+    top: 100px;
+}
+
+#icon{
+    position: relative;
+    left: 70.5%;
+    top: 140px;
+}
+.my-images {
+    max-width: 70%;
+    max-height: 30%;
+    position: absolute;
+    top: 115px;
+    left: 15%;
+    transition: .3s;
+    
+}
+
+.my-images:hover{
+    transform: scale(1.20);
+}
